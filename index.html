@@ -1,589 +1,557 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prasanna Nagarale | AI Engineer</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>prasanna@PNOS:~$ AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Berkeley+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Particles Background -->
-    <div id="particles-js"></div>
-    
-    <!-- Navigation -->
-    <nav>
-        <div class="container">
-            <div class="logo">PRASANNA NAGARALE</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-greeting">Welcome to my portfolio</div>
-                <h1>Hi, I'm <span class="gradient-text">Prasanna Nagarale</span></h1>
-                <h2 class="hero-subtitle">AI Engineer | <span class="typing-animation" id="typed-text"></span></h2>
-                <p class="hero-tagline">Building Smarter Realities Through Code</p>
-                <p class="hero-description">Transforming real-world ideas into powerful AI tools using ML, NLP, and web tech like Django & Hugging Face. Exploring the frontiers of GenAI, Data Science, and intelligent systems.</p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-outline">Let's Connect</a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-number">8+</div>
-                    <div class="stat-label">AI Projects</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Active Users</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">99%</div>
-                    <div class="stat-label">ML Accuracy</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">2</div>
-                    <div class="stat-label">Internships</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2><span class="gradient-text">About Me</span></h2>
-            </div>
-            
-            <div class="about-container">
-                <div class="about-image">
-                    <img src="assets/profile.png" alt="Prasanna Nagarale" onerror="this.style.display='none'">
-                </div>
-                
-                <div class="about-content">
-                    <p>I'm an <strong>AI/ML Engineer</strong> specializing in production-grade intelligent systems. I excel at developing cutting-edge AI solutions and solving real-world problems by building scalable applications using <strong>GenAI, NLP, and Computer Vision</strong>.</p>
-                    
-                    <p>My expertise spans from <strong>fine-tuning large language models</strong> to creating <strong>multi-agent systems</strong>, with a proven track record of delivering practical results across diverse domains.</p>
-                    
-                    <p>I thrive on turning complex AI research into usable, practical tools that generate real business impact and create new possibilities. Let's build something remarkable together!</p>
-                    
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <span class="highlight-icon">🎯</span>
-                            <div>
-                                <strong>Focus</strong>
-                                <p>Production AI Systems</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="highlight-icon">💡</span>
-                            <div>
-                                <strong>Passion</strong>
-                                <p>GenAI & Innovation</p>
-                            </div>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="highlight-icon">🚀</span>
-                            <div>
-                                <strong>Goal</strong>
-                                <p>Scalable AI Solutions</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- SCROLL HUD -->
+<div id="scroll-hud">
+  <span class="sh-cap">TOP</span>
+  <div id="scroll-track">
+    <div id="scroll-fill"></div>
+    <div id="scroll-thumb"></div>
+  </div>
+  <div id="scroll-pct">0%</div>
+</div>
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2><span class="gradient-text">Experience</span></h2>
-                <p>Professional journey building AI solutions</p>
-            </div>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Feb 2025 - July 2025</div>
-                        <h3>Software Development Intern - AI/ML Specialization</h3>
-                        <h4>ClickCrawl Media Pvt. Ltd., Hubli, Karnataka</h4>
-                        <ul>
-                            <li>Engineered <strong>WordRift AI</strong>, a comprehensive AI writing platform with paraphrasing, grammar correction, translation, plagiarism detection, and AI humanization capabilities using transformer models (T5, BART, RoBERTa)</li>
-                            <li>Achieved <strong>92% model accuracy</strong> and reduced response time by <strong>75%</strong> through optimization techniques</li>
-                            <li>Developed <strong>HDR image enhancement system</strong> for automated processing of multi-exposure photographs using OpenCV, delivering 90% professional-grade quality with 95% artifact reduction</li>
-                            <li>Built comprehensive user management system with premium tier logic, usage tracking, and real-time analytics dashboard for monitoring system performance</li>
-                        </ul>
-                        <div class="tech-tags">
-                            <span>Django</span>
-                            <span>Transformers</span>
-                            <span>OpenCV</span>
-                            <span>PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
+<!-- BOOT SCREEN -->
+<div id="boot">
+  <div class="boot-inner">
+    <div class="boot-logo">PNOS</div>
+    <div class="boot-sub">Prasanna Nagarale Operating System v1.0</div>
+    <div class="boot-log" id="boot-log"></div>
+    <div class="boot-bar-wrap"><div class="boot-bar" id="boot-bar"></div></div>
+    <div class="boot-ready" id="boot-ready">[ PRESS ANY KEY OR SCROLL TO ENTER ]</div>
+  </div>
+</div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Feb 2023 - Mar 2023</div>
-                        <h3>Web Development Intern</h3>
-                        <h4>FUEL, Hubli, Karnataka</h4>
-                        <ul>
-                            <li>Completed intensive one-month internship focused on <strong>full-stack web development</strong> fundamentals</li>
-                            <li>Gained hands-on experience with <strong>HTML5, CSS3, and Python</strong> for building responsive web applications</li>
-                            <li>Developed strong <strong>communication and collaboration skills</strong> working in a professional team environment</li>
-                            <li>Built foundational understanding of web technologies and software development best practices</li>
-                        </ul>
-                        <div class="tech-tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>Python</span>
-                            <span>Team Collaboration</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2><span class="gradient-text">Tech Stack</span></h2>
-                <p>Technologies and tools I work with</p>
-            </div>
-            
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <div class="skill-icon">🤖</div>
-                    <h3>AI/ML & GenAI</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LLMs</span>
-                        <span class="skill-tag">RAG</span>
-                        <span class="skill-tag">LangChain</span>
-                        <span class="skill-tag">Hugging Face</span>
-                        <span class="skill-tag">Groq</span>
-                        <span class="skill-tag">Fine-tuning</span>
-                        <span class="skill-tag">Prompt Engineering</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <div class="skill-icon">🧠</div>
-                    <h3>ML Frameworks</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">TensorFlow</span>
-                        <span class="skill-tag">Scikit-learn</span>
-                        <span class="skill-tag">Keras</span>
-                        <span class="skill-tag">OpenCV</span>
-                        <span class="skill-tag">FAISS</span>
-                    </div>
-                </div>
+<!-- TASKBAR -->
+<div id="taskbar">
+  <div class="tb-left">
+    <span class="tb-logo">⬡ PNOS</span>
+    <span class="tb-sep">|</span>
+    <span class="tb-proc" id="tb-proc">~</span>
+  </div>
+  <nav class="tb-nav">
+    <a href="#home"       class="tb-link" data-section="home">       ~/home</a>
+    <a href="#about"      class="tb-link" data-section="about">      ./about</a>
+    <a href="#experience" class="tb-link" data-section="experience"> ./exp</a>
+    <a href="#projects"   class="tb-link" data-section="projects">   ./projects</a>
+    <a href="#skills"     class="tb-link" data-section="skills">     ./stack</a>
+    <a href="#contact"    class="tb-link" data-section="contact">    ./contact</a>
+  </nav>
+  <div class="tb-right">
+    <div class="tb-uptime">
+      <span class="up-label">UPTIME</span>
+      <span class="up-val" id="tb-uptime">00:00:00</span>
+    </div>
+    <span class="tb-status"><span class="status-dot"></span>ONLINE</span>
+    <span class="tb-clock" id="tb-clock">00:00:00</span>
+  </div>
+  <button class="tb-ham" id="tb-ham" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</div>
 
-                <div class="skill-category">
-                    <div class="skill-icon">📊</div>
-                    <h3>Data Science</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Data Visualization</span>
-                        <span class="skill-tag">EDA</span>
-                        <span class="skill-tag">Feature Engineering</span>
-                        <span class="skill-tag">Model Evaluation</span>
-                        <span class="skill-tag">Hypothesis Testing</span>
-                        <span class="skill-tag">Statistical Analysis</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <div class="skill-icon">💻</div>
-                    <h3>Development</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Django</span>
-                        <span class="skill-tag">Flask</span>
-                        <span class="skill-tag">Streamlit</span>
-                        <span class="skill-tag">PostgreSQL</span>
-                        <span class="skill-tag">Docker</span>
-                        <span class="skill-tag">Git</span>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <div class="skill-icon">🎯</div>
-                    <h3>Specializations</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">NLP</span>
-                        <span class="skill-tag">Computer Vision</span>
-                        <span class="skill-tag">Multi-Agent Systems</span>
-                        <span class="skill-tag">Deep Learning</span>
-                        <span class="skill-tag">MLOps</span>
-                    </div>
-                </div>
+<!-- MOBILE NAV DRAWER -->
+<div class="mob-nav" id="mob-nav">
+  <a href="#home"       class="mob-link">~/home</a>
+  <a href="#about"      class="mob-link">./about</a>
+  <a href="#experience" class="mob-link">./exp</a>
+  <a href="#projects"   class="mob-link">./projects</a>
+  <a href="#skills"     class="mob-link">./stack</a>
+  <a href="#contact"    class="mob-link">./contact</a>
+</div>
 
-                  <div class="skill-category">
-                    <div class="skill-icon">🌐</div>
-                    <h3>Web Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">TailwindCSS</span>
-                        <span class="skill-tag">Bootstrap</span>
-                        <span class="skill-tag">Responsive Design</span>
-                    </div>
-                </div>
-            </div>
+<!-- ═══════ HOME / HERO ═══════ -->
+<section id="home" class="sec">
+  <canvas id="neural-canvas"></canvas>
+  <div class="hero-terminal">
+    <div class="term-chrome">
+      <span class="tc-dot tc-red"></span>
+      <span class="tc-dot tc-yel"></span>
+      <span class="tc-dot tc-grn"></span>
+      <span class="tc-title">prasanna@PNOS: ~</span>
+    </div>
+    <div class="term-body">
+      <div class="term-line"><span class="prompt">prasanna@PNOS:~$</span> <span class="cmd" id="hero-cmd"></span><span class="cur-bl"></span></div>
+      <div class="term-output" id="hero-output"></div>
+      <div class="hero-cta" id="hero-cta" style="display:none">
+        <a href="#projects" class="btn-run">▶ run ./projects</a>
+        <a href="resume.pdf" download class="btn-dl">⬇ wget resume.pdf</a>
+      </div>
+    </div>
+  </div>
+  <div class="scan-line"></div>
+</section>
+
+<!-- ═══════ ABOUT ═══════ -->
+<section id="about" class="sec">
+  <canvas class="sec-canvas" id="about-canvas"></canvas>
+  <div class="sec-wrap">
+    <div class="sec-header">
+      <span class="sec-prompt">prasanna@PNOS:~$</span>
+      <span class="sec-cmd"> cat about.sys</span>
+    </div>
+
+    <div class="about-layout">
+      <div class="about-left">
+        <div class="file-block">
+          <div class="fb-head"><span class="fb-icon">▸</span> identity.json</div>
+          <div class="fb-body">
+<pre class="json-view">{
+  <span class="jk">"name"</span>: <span class="js">"Prasanna Nagarale"</span>,
+  <span class="jk">"role"</span>: <span class="js">"AI / ML Engineer"</span>,
+  <span class="jk">"location"</span>: <span class="js">"Vijayapura, Karnataka, IN"</span>,
+  <span class="jk">"status"</span>: <span class="jv-green">"open_to_opportunities"</span>,
+  <span class="jk">"education"</span>: <span class="js">"B.E. AI &amp; ML — BEC 2021–25"</span>,
+  <span class="jk">"focus"</span>: [
+    <span class="js">"Production AI Systems"</span>,
+    <span class="js">"RAG Pipelines"</span>,
+    <span class="js">"LLM Fine-tuning"</span>,
+    <span class="js">"Multi-Agent Platforms"</span>
+  ]
+}</pre>
+          </div>
         </div>
-    </section>
-    
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2><span class="gradient-text">Featured Projects</span></h2>
-                <p>Production-grade AI systems solving real-world problems</p>
-            </div>
-            
-            <div class="projects-grid">
-                <!-- WordRift AI -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/wordrift.png" alt="WordRift AI" onerror="this.src='https://via.placeholder.com/400x250/667eea/ffffff?text=WordRift+AI'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Django</span>
-                            <span class="project-tag">Transformers</span>
-                            <span class="project-tag">NLP</span>
-                        </div>
-                        <h3>WordRift AI</h3>
-                        <p>Full-stack AI writing platform with 11 features: paraphrasing, grammar correction, translation (50+ languages), plagiarism detection, and AI humanization.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">⚡</span>
-                                <span>500+ Users</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">🎯</span>
-                                <span>92% Accuracy</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://wordriftai.com" class="project-link link-live" target="_blank">Live Demo</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Math Mentor AI -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/mathmentor.png" alt="Math Mentor AI" onerror="this.src='https://via.placeholder.com/400x250/f093fb/ffffff?text=Math+Mentor+AI'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">RAG</span>
-                            <span class="project-tag">Multi-Agent</span>
-                            <span class="project-tag">Groq</span>
-                        </div>
-                        <h3>Math Mentor AI</h3>
-                        <p>Multimodal math-solving agent with text/image/audio input, RAG pipeline, HITL oversight, and memory for JEE-level problems.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">🤖</span>
-                                <span>5+ Agents</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">📚</span>
-                                <span>4 Topics</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/prasanna-nagarale/Math_Mentor_AI" class="project-link link-code" target="_blank">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- DocuMind-RAG -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/documind.png" alt="DocuMind RAG" onerror="this.src='https://via.placeholder.com/400x250/4facfe/ffffff?text=DocuMind+RAG'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">LangChain</span>
-                            <span class="project-tag">FAISS</span>
-                            <span class="project-tag">RAG</span>
-                        </div>
-                        <h3>DocuMind-RAG</h3>
-                        <p>RAG chatbot for hallucination-free document Q&A. Supports PDFs, web scraping, and multi-format documents with semantic search.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">📄</span>
-                                <span>Multi-Format</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">🔍</span>
-                                <span>Vector Search</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/prasanna-nagarale/DocuMind-RAG" class="project-link link-code" target="_blank">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- HDR Processor -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/hdr_project.png" alt="HDR Enhancement" onerror="this.src='https://via.placeholder.com/400x250/fa709a/ffffff?text=HDR+Enhancement'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">OpenCV</span>
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">Image Processing</span>
-                        </div>
-                        <h3>HDR Image Enhancement</h3>
-                        <p>Automated HDR processor using Debevec algorithm. Merges multi-exposure images with 90% professional-grade quality in 2 seconds.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">⚡</span>
-                                <span>2s Processing</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">🎨</span>
-                                <span>90% Quality</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/prasanna-nagarale/HDR_Image_Enhancement_System" class="project-link link-code" target="_blank">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Banking Chatbot -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/chatbot_project.jpg" alt="Banking Chatbot" onerror="this.src='https://via.placeholder.com/400x250/a8edea/ffffff?text=Banking+Chatbot'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">TensorFlow</span>
-                            <span class="project-tag">Voice AI</span>
-                        </div>
-                        <h3>NLP Banking Chatbot</h3>
-                        <p>Intelligent banking assistant with 94% intent classification accuracy. Handles 15+ query categories with voice and text support.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">🎯</span>
-                                <span>94% Accuracy</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">⚡</span>
-                                <span><300ms</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/prasanna-nagarale/NLP-Banking-Chatbot" class="project-link link-code" target="_blank">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Crop Recommendation -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/crop_project.jpg" alt="Crop Recommendation" onerror="this.src='https://via.placeholder.com/400x250/ffecd2/333333?text=Crop+Recommendation'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Machine Learning</span>
-                            <span class="project-tag">Random Forest</span>
-                            <span class="project-tag">Agriculture</span>
-                        </div>
-                        <h3>Crop Recommendation System</h3>
-                        <p>ML system achieving 99.3% accuracy for optimal crop selection based on soil nutrients and environmental conditions.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">🎯</span>
-                                <span>99.3% Accuracy</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">🌾</span>
-                                <span>22 Crops</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/prasanna-nagarale/Crop-Recommendation-System" class="project-link link-code" target="_blank">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Phi-2 Model -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/phi2.png" alt="Phi-2 Financial Sentiment" onerror="this.src='https://via.placeholder.com/400x200/ff9a9e/ffffff?text=Phi-2+Model'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">Fine-tuning</span>
-                            <span class="project-tag">QLoRA</span>
-                            <span class="project-tag">Hugging Face</span>
-                        </div>
-                        <h3>Phi-2 Financial Sentiment</h3>
-                        <p>Fine-tuned Microsoft Phi-2 (2.7B params) for financial sentiment analysis using QLoRA on 4,000 samples. Published on Hugging Face.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">🤗</span>
-                                <span>Published</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">📊</span>
-                                <span>4K Samples</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://huggingface.co/prasanna030/phi2-financial-sentiment-lora" class="project-link link-live" target="_blank">View Model</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- LangGraph Assistant -->
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="assets/langgraph.png" alt="LangGraph AI Assistant" onerror="this.src='https://via.placeholder.com/400x200/a1c4fd/ffffff?text=LangGraph+AI'">
-                    </div>
-                    <div class="project-content">
-                        <div class="project-tags">
-                            <span class="project-tag">LangGraph</span>
-                            <span class="project-tag">Groq</span>
-                            <span class="project-tag">Tavily</span>
-                        </div>
-                        <h3>LangGraph AI Assistant</h3>
-                        <p>Intelligent research assistant using LangGraph that routes queries to web search or direct LLM response based on context analysis.</p>
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <span class="metric-icon">🔍</span>
-                                <span>Smart Routing</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-icon">⚡</span>
-                                <span>Real-time</span>
-                            </div>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/prasanna-nagarale/langgraph-research-assistant" class="project-link link-code" target="_blank">View Code</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <div class="file-block" style="margin-top:20px">
+          <div class="fb-head"><span class="fb-icon">▸</span> bio.md</div>
+          <div class="fb-body bio-text">
+            <p>I build <mark>AI systems</mark> that solve real-world problems at scale. My work spans GenAI, NLP, Computer Vision and full-stack AI deployment.</p>
+            <p>I've shipped platforms serving <mark>500+ real users</mark>, published models on Hugging Face, and built systems hitting <mark>99.3% accuracy</mark> in production.</p>
+            <p>I thrive at the intersection of <mark>research and engineering</mark> — turning complex AI papers into tools that actually work for real people.</p>
+          </div>
         </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2><span class="gradient-text">Let's Connect</span></h2>
-                <p>Open to collaboration on AI/ML projects and job opportunities</p>
+      </div>
+
+      <div class="about-right">
+        <div class="stats-term">
+          <div class="st-head">$ htop --ai-metrics</div>
+          <div class="stat-row-grid">
+            <div class="stat-item">
+              <div class="si-val" style="color:#00ff88" data-target="14" data-suffix="+">14+</div>
+              <div class="si-lbl">AI_PROJECTS</div>
+              <div class="si-bar"><div class="si-fill" style="width:90%;background:#00ff88"></div></div>
             </div>
-            
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>I'm always excited to discuss new AI projects, collaborate on research, or explore job opportunities. Whether you have a question or just want to say hi, feel free to reach out!</p>
-                    
-                    <div class="contact-methods">
-                        <a href="mailto:nagaraleprasanna@gmail.com" class="contact-item">
-                            <div class="contact-icon">📧</div>
-                            <div>
-                                <div class="contact-label">Email</div>
-                                <div class="contact-value">nagaraleprasanna@gmail.com</div>
-                            </div>
-                        </a>
-                        
-                        <a href="tel:+919448178417" class="contact-item">
-                            <div class="contact-icon">📱</div>
-                            <div>
-                                <div class="contact-label">Phone</div>
-                                <div class="contact-value">+91 9448178417</div>
-                            </div>
-                        </a>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">📍</div>
-                            <div>
-                                <div class="contact-label">Location</div>
-                                <div class="contact-value">Bangalore, Karnataka, India</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" name="name" placeholder="John Doe" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Your Email</label>
-                            <input type="email" name="email" placeholder="john@example.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea name="message" placeholder="Your message here..." required></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
-                </div>
+            <div class="stat-item">
+              <div class="si-val" style="color:#00d4ff" data-target="500" data-suffix="+">500+</div>
+              <div class="si-lbl">LIVE_USERS</div>
+              <div class="si-bar"><div class="si-fill" style="width:75%;background:#00d4ff"></div></div>
             </div>
+            <div class="stat-item">
+              <div class="si-val" style="color:#ffcc00" data-target="99.3" data-suffix="%" data-decimal="1">99.3%</div>
+              <div class="si-lbl">ML_ACCURACY</div>
+              <div class="si-bar"><div class="si-fill" style="width:99%;background:#ffcc00"></div></div>
+            </div>
+            <div class="stat-item">
+              <div class="si-val" style="color:#ff6b9d" data-target="2" data-suffix="+">2+</div>
+              <div class="si-lbl">HF_MODELS</div>
+              <div class="si-bar"><div class="si-fill" style="width:40%;background:#ff6b9d"></div></div>
+            </div>
+          </div>
         </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="social-links">
-            <a href="https://github.com/prasanna-nagarale" class="social-link" target="_blank" title="GitHub">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            </a>
-            <a href="https://linkedin.com/in/prasanna-ai" class="social-link" target="_blank" title="LinkedIn">
-                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a href="https://huggingface.co/prasanna030" class="social-link" target="_blank" title="Hugging Face">
-                <span style="font-size: 20px;">🤗</span>
-            </a>
+
+        <div class="cert-block">
+          <div class="fb-head"><span class="fb-icon">▸</span> certs.log</div>
+          <div class="cert-list">
+            <div class="cert-item"><span class="cert-chk">✓</span> Career Essentials in GenAI — Microsoft &amp; LinkedIn</div>
+            <div class="cert-item"><span class="cert-chk">✓</span> Machine Learning with Python — IBM</div>
+            <div class="cert-item"><span class="cert-chk">✓</span> NLP — Infosys Springboard</div>
+            <div class="cert-item"><span class="cert-chk">✓</span> AI Fundamentals — Infosys</div>
+          </div>
         </div>
-        <p class="footer-quote">"Building AI systems that create possibilities, not just solve problems."</p>
-        <p class="footer-copyright">© 2025 Prasanna Nagarale. Built with passion and code.</p>
-    </footer>
-    
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ EXPERIENCE ═══════ -->
+<section id="experience" class="sec">
+  <canvas class="sec-canvas" id="exp-canvas"></canvas>
+  <div class="sec-wrap">
+    <div class="sec-header">
+      <span class="sec-prompt">prasanna@PNOS:~$</span>
+      <span class="sec-cmd"> git log --experience --pretty=full</span>
+    </div>
+
+    <div class="git-log">
+
+      <div class="git-item">
+        <div class="git-dot-col">
+          <div class="git-dot gd-active"></div>
+          <div class="git-line"></div>
+        </div>
+        <div class="git-content">
+          <div class="git-hash"><span class="ghash">a3f2c91</span> <span class="gbranch">HEAD → main</span> <span class="gbadge g-new">● RECENT</span> <span class="gbadge g-cert">CERTIFIED</span></div>
+          <div class="git-title">AI Intern — GenAI + Prompt Engineering</div>
+          <div class="git-meta"><span class="gco">AIVariant</span> <span class="gloc">📍 Remote</span> <span class="gdate">Dec 2025 → Mar 2026</span></div>
+          <ul class="git-desc">
+            <li>Completed intensive internship on Generative AI and advanced Prompt Engineering</li>
+            <li>Worked extensively with ChatGPT APIs and production LLM systems</li>
+            <li>Applied QLoRA and PEFT for parameter-efficient model fine-tuning</li>
+          </ul>
+          <div class="git-tags"><span class="gtag">GenAI</span><span class="gtag">Prompt Engineering</span><span class="gtag">LLMs</span><span class="gtag">QLoRA</span></div>
+        </div>
+      </div>
+
+      <div class="git-item">
+        <div class="git-dot-col">
+          <div class="git-dot gd-past"></div>
+          <div class="git-line"></div>
+        </div>
+        <div class="git-content">
+          <div class="git-hash"><span class="ghash">7b1e4d2</span></div>
+          <div class="git-title">Software Dev Intern — AI/ML Specialization</div>
+          <div class="git-meta"><span class="gco">ClickCrawl Media Pvt. Ltd.</span> <span class="gloc">📍 Hubli, Karnataka</span> <span class="gdate">Feb 2025 → Jul 2025</span></div>
+          <ul class="git-desc">
+            <li>Engineered WordRift AI — production platform serving 500+ users with 92% accuracy</li>
+            <li>Reduced LLM response time by 75% through model optimization and caching</li>
+            <li>Built HDR image enhancement system achieving 90% quality in 2 seconds</li>
+            <li>FastAPI backend with PostgreSQL and real-time analytics dashboard</li>
+          </ul>
+          <div class="git-tags"><span class="gtag">Django</span><span class="gtag">FastAPI</span><span class="gtag">Transformers</span><span class="gtag">OpenCV</span><span class="gtag">PostgreSQL</span></div>
+        </div>
+      </div>
+
+      <div class="git-item">
+        <div class="git-dot-col">
+          <div class="git-dot gd-old"></div>
+        </div>
+        <div class="git-content">
+          <div class="git-hash"><span class="ghash">2c09a88</span></div>
+          <div class="git-title">Web Development Intern</div>
+          <div class="git-meta"><span class="gco" style="color:#a78bfa">FUEL</span> <span class="gloc">📍 Hubli, Karnataka</span> <span class="gdate">Feb 2023 → Mar 2023</span></div>
+          <ul class="git-desc">
+            <li>Full-stack web development using HTML5, CSS3 and Python</li>
+            <li>Built responsive applications in a professional team environment</li>
+          </ul>
+          <div class="git-tags"><span class="gtag">HTML</span><span class="gtag">CSS</span><span class="gtag">Python</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PROJECTS ═══════ -->
+<section id="projects" class="sec">
+  <canvas class="sec-canvas" id="proj-canvas"></canvas>
+  <div class="sec-wrap">
+    <div class="sec-header">
+      <span class="sec-prompt">prasanna@PNOS:~$</span>
+      <span class="sec-cmd"> ls -la ./projects/ --sort=impact</span>
+    </div>
+
+    <!-- FLAGSHIP -->
+    <div class="proj-flagship">
+      <div class="pf-label">// FLAGSHIP</div>
+      <div class="pf-inner">
+        <div class="pf-left">
+          <div class="pf-status"><span class="pdot live"></span> LIVE IN PRODUCTION</div>
+          <div class="pf-name">WordRift AI</div>
+          <div class="pf-desc">Production AI content platform powering 500+ real users with 92% accuracy. Engineered with Django, FastAPI and Transformers — slashed response time by 75% through intelligent LLM optimization.</div>
+          <div class="pf-stack">
+            <span class="stag">Django</span><span class="stag">FastAPI</span><span class="stag">Transformers</span><span class="stag">PostgreSQL</span><span class="stag">LLMs</span>
+          </div>
+          <div class="pf-links">
+            <a href="https://wordriftai.com/" target="_blank" class="btn-run">▶ ./run --live</a>
+            <a href="#" target="_blank" class="btn-src">{ } source</a>
+          </div>
+        </div>
+        <div class="pf-right">
+          <div class="pf-metrics">
+            <div class="pm-item"><span class="pm-val" style="color:#00ff88">500+</span><span class="pm-key">USERS</span></div>
+            <div class="pm-item"><span class="pm-val" style="color:#ffcc00">92%</span><span class="pm-key">ACCURACY</span></div>
+            <div class="pm-item"><span class="pm-val" style="color:#00d4ff">75%</span><span class="pm-key">FASTER</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED + HF row -->
+    <div class="proj-mid-row">
+
+      <div class="proj-card feat-card type-rag">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-badge">FEATURED</span><span class="type-pill pill-rag">RAG / AGENT</span></div>
+        <div class="pc-name" data-text="QueryFox AI">QueryFox AI</div>
+        <div class="pc-desc">Advanced RAG System with Intelligent Agentic Routing. Combines Retrieval Augmented Generation with agentic web search routing for document intelligence.</div>
+        <div class="pc-stack"><span class="stag">RAG</span><span class="stag">LangChain</span><span class="stag">Agentic AI</span><span class="stag">Vector DB</span></div>
+        <div class="pc-links">
+          <a href="https://github.com/prasanna-nagarale/QueryFoxAi" target="_blank" class="btn-src">{ } source</a>
+        </div>
+      </div>
+
+      <div class="proj-card hf-card type-nlp">
+        <div class="pc-top"><span class="pdot live"></span><span class="pc-badge hf-badge">🤗 HF PUBLISHED</span><span class="type-pill pill-nlp">NLP / LLM</span></div>
+        <div class="pc-name" data-text="Phi-2 Financial Sentiment">Phi-2 Financial Sentiment</div>
+        <div class="pc-desc">Fine-tuned 2.7B parameter Phi-2 LLM using QLoRA for financial sentiment analysis. Publicly available on Hugging Face.</div>
+        <div class="pc-stack"><span class="stag">QLoRA</span><span class="stag">Phi-2</span><span class="stag">Fine-tuning</span><span class="stag">NLP</span></div>
+        <div class="pc-links">
+          <a href="https://huggingface.co/prasanna030/phi2-financial-sentiment-lora" target="_blank" class="btn-run">🤗 view model</a>
+        </div>
+      </div>
+
+      <div class="proj-card hf-card type-nlp">
+        <div class="pc-top"><span class="pdot live"></span><span class="pc-badge hf-badge">🤗 HF PUBLISHED</span><span class="type-pill pill-nlp">NLP / LLM</span></div>
+        <div class="pc-name" data-text="GPT-2 QLoRA Summarizer">GPT-2 QLoRA Summarizer</div>
+        <div class="pc-desc">Fine-tuned GPT-2 using QLoRA (PEFT) for abstractive text summarization under limited compute. Evaluates parameter-efficient fine-tuning techniques.</div>
+        <div class="pc-stack"><span class="stag">GPT-2</span><span class="stag">QLoRA</span><span class="stag">PEFT</span><span class="stag">NLP</span></div>
+        <div class="pc-links">
+          <a href="https://huggingface.co/prasanna030/gpt2-qlora-summarizer" target="_blank" class="btn-run">🤗 view model</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MORE PROJECTS GRID -->
+    <div class="proj-grid-label">// more ./projects</div>
+    <div class="proj-grid">
+
+      <div class="proj-card type-rag">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-rag">RAG / AGENT</span></div>
+        <div class="pc-name" data-text="Math Mentor AI">Math Mentor AI</div>
+        <div class="pc-desc">Multimodal multi-agent math tutor for JEE-level problems using RAG and 5+ specialized agents.</div>
+        <div class="pc-stack"><span class="stag">RAG</span><span class="stag">Multi-Agent</span><span class="stag">Groq</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/Math_Mentor_AI" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-rag">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-rag">RAG / AGENT</span></div>
+        <div class="pc-name" data-text="DocuMind RAG">DocuMind RAG</div>
+        <div class="pc-desc">Intelligent document Q&A system using advanced RAG pipeline with semantic search and reranking.</div>
+        <div class="pc-stack"><span class="stag">RAG</span><span class="stag">LangChain</span><span class="stag">FAISS</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/DocuMind-RAG" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-nlp">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-nlp">NLP / LLM</span></div>
+        <div class="pc-name" data-text="AI-DDR Generator">AI-DDR Generator</div>
+        <div class="pc-desc">Reads two input documents and auto-generates a comprehensive Detailed Diagnostic Report using LLMs.</div>
+        <div class="pc-stack"><span class="stag">LLMs</span><span class="stag">Document AI</span><span class="stag">FastAPI</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/Ai-DDR-Generator" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-rag">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-rag">RAG / AGENT</span></div>
+        <div class="pc-name" data-text="AI Medical Claim">AI Medical Claim</div>
+        <div class="pc-desc">FastAPI + LangGraph multi-agent system for processing PDF medical claims with document segregation.</div>
+        <div class="pc-stack"><span class="stag">LangGraph</span><span class="stag">FastAPI</span><span class="stag">PDF AI</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/AI_Medical_Claim" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-nlp">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-nlp">NLP / LLM</span></div>
+        <div class="pc-name" data-text="Workflow Builder Lite">Workflow Builder Lite</div>
+        <div class="pc-desc">Web app for creating and running AI-powered text processing workflows with multiple sequential steps.</div>
+        <div class="pc-stack"><span class="stag">AI Workflows</span><span class="stag">LLMs</span><span class="stag">Web App</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/Workflow-Builder-Lite" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-nlp">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-nlp">NLP / LLM</span></div>
+        <div class="pc-name" data-text="NLP Banking Chatbot">NLP Banking Chatbot</div>
+        <div class="pc-desc">Intelligent banking assistant using NLP for automated customer service and complex query resolution.</div>
+        <div class="pc-stack"><span class="stag">NLP</span><span class="stag">Chatbot</span><span class="stag">NLTK</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/NLP-Banking-Chatbot" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-ml">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-ml">CORE ML</span></div>
+        <div class="pc-name" data-text="Crop Recommendation">Crop Recommendation</div>
+        <div class="pc-desc">ML system for 22 crop types hitting 99.3% accuracy using Random Forest, deployed on Flask.</div>
+        <div class="pc-stack"><span class="stag">Random Forest</span><span class="stag">Flask</span><span class="stag">ML</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/Crop-Recommendation-System" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-ml">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-ml">HEALTHCARE AI</span></div>
+        <div class="pc-name" data-text="Alzheimer's Detection">Alzheimer's Detection</div>
+        <div class="pc-desc">Medical AI for early Alzheimer's risk detection analyzing clinical, cognitive and lifestyle data.</div>
+        <div class="pc-stack"><span class="stag">Medical AI</span><span class="stag">Classification</span><span class="stag">Python</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/Alzheimer-s_Detection" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+      <div class="proj-card type-cv">
+        <div class="pc-top"><span class="pdot active"></span><span class="pc-lbl">ACTIVE</span><span class="type-pill pill-cv">COMP. VISION</span></div>
+        <div class="pc-name" data-text="HDR Image Enhancement">HDR Image Enhancement</div>
+        <div class="pc-desc">Computer vision pipeline for professional HDR image processing achieving 90% quality in 2 seconds.</div>
+        <div class="pc-stack"><span class="stag">OpenCV</span><span class="stag">Computer Vision</span><span class="stag">Python</span></div>
+        <div class="pc-links"><a href="https://github.com/prasanna-nagarale/HDR_Image_Enhancement_System" target="_blank" class="btn-src">{ } source</a></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ SKILLS ═══════ -->
+<section id="skills" class="sec">
+  <canvas class="sec-canvas" id="skills-canvas"></canvas>
+  <div class="sec-wrap">
+    <div class="sec-header">
+      <span class="sec-prompt">prasanna@PNOS:~$</span>
+      <span class="sec-cmd"> pip list --installed --format=verbose</span>
+    </div>
+
+    <div class="skills-os">
+
+      <div class="skill-module">
+        <div class="sm-head"><span class="sm-icon">🤖</span><span class="sm-name">genai_llms</span><span class="sm-ver">v3.x</span><span class="sm-status ok">● LOADED</span></div>
+        <div class="sm-tags">
+          <span class="sk">LLMs</span><span class="sk">RAG</span><span class="sk">Fine-tuning</span><span class="sk">QLoRA</span><span class="sk">PEFT</span><span class="sk">Prompt Engineering</span><span class="sk">Hugging Face</span>
+        </div>
+      </div>
+
+      <div class="skill-module">
+        <div class="sm-head"><span class="sm-icon">⛓</span><span class="sm-name">agent_frameworks</span><span class="sm-ver">v2.x</span><span class="sm-status ok">● LOADED</span></div>
+        <div class="sm-tags">
+          <span class="sk">LangChain</span><span class="sk">LangGraph</span><span class="sk">AutoGen</span><span class="sk">Multi-Agent</span><span class="sk">FAISS</span>
+        </div>
+      </div>
+
+      <div class="skill-module">
+        <div class="sm-head"><span class="sm-icon">🐍</span><span class="sm-name">ml_data_science</span><span class="sm-ver">v4.x</span><span class="sm-status ok">● LOADED</span></div>
+        <div class="sm-tags">
+          <span class="sk">Python</span><span class="sk">PyTorch</span><span class="sk">TensorFlow</span><span class="sk">Scikit-Learn</span><span class="sk">NumPy</span><span class="sk">Pandas</span>
+        </div>
+      </div>
+
+      <div class="skill-module">
+        <div class="sm-head"><span class="sm-icon">🚀</span><span class="sm-name">backend_apis</span><span class="sm-ver">v5.x</span><span class="sm-status ok">● LOADED</span></div>
+        <div class="sm-tags">
+          <span class="sk">FastAPI</span><span class="sk">Django</span><span class="sk">Flask</span><span class="sk">REST APIs</span><span class="sk">PostgreSQL</span><span class="sk">MongoDB</span>
+        </div>
+      </div>
+
+      <div class="skill-module">
+        <div class="sm-head"><span class="sm-icon">👁</span><span class="sm-name">cv_nlp</span><span class="sm-ver">v2.x</span><span class="sm-status ok">● LOADED</span></div>
+        <div class="sm-tags">
+          <span class="sk">OpenCV</span><span class="sk">NLTK</span><span class="sk">spaCy</span><span class="sk">Transformers</span><span class="sk">Image Processing</span><span class="sk">Sentence BERT</span>
+        </div>
+      </div>
+
+      <div class="skill-module">
+        <div class="sm-head"><span class="sm-icon">☁</span><span class="sm-name">devops_tools</span><span class="sm-ver">v1.x</span><span class="sm-status ok">● LOADED</span></div>
+        <div class="sm-tags">
+          <span class="sk">Docker</span><span class="sk">Git</span><span class="sk">GitHub Actions</span><span class="sk">VS Code</span><span class="sk">Jupyter</span><span class="sk">Streamlit</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sys-summary">
+      <span>6 modules loaded</span>
+      <span class="ss-sep">·</span>
+      <span>0 errors</span>
+      <span class="ss-sep">·</span>
+      <span style="color:#00ff88">All systems operational</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CONTACT ═══════ -->
+<section id="contact" class="sec">
+  <canvas class="sec-canvas" id="contact-canvas"></canvas>
+  <div class="sec-wrap">
+    <div class="sec-header">
+      <span class="sec-prompt">prasanna@PNOS:~$</span>
+      <span class="sec-cmd"> ssh prasanna@nagarale.dev --init-connection</span>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-left">
+        <div class="conn-block">
+          <div class="cb-label">// CONNECTION DETAILS</div>
+          <div class="conn-item">
+            <span class="ci-key">EMAIL</span>
+            <a href="mailto:prasannannagarale@gmail.com" class="ci-val">prasannannagarale@gmail.com</a>
+          </div>
+          <div class="conn-item">
+            <span class="ci-key">LINKEDIN</span>
+            <a href="https://www.linkedin.com/in/prasanna-ai/" target="_blank" class="ci-val">linkedin.com/in/prasanna-ai</a>
+          </div>
+          <div class="conn-item">
+            <span class="ci-key">GITHUB</span>
+            <a href="https://github.com/prasanna-nagarale" target="_blank" class="ci-val">github.com/prasanna-nagarale</a>
+          </div>
+          <div class="conn-item">
+            <span class="ci-key">HUGGING FACE</span>
+            <a href="https://huggingface.co/prasanna030" target="_blank" class="ci-val">huggingface.co/prasanna030</a>
+          </div>
+          <div class="conn-item">
+            <span class="ci-key">LOCATION</span>
+            <span class="ci-val">Vijayapura, Karnataka, India</span>
+          </div>
+        </div>
+        <div class="avail-block">
+          <span class="av-dot"></span>
+          <span>Available for AI/ML roles, collaborations &amp; interesting projects.</span>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="form-term">
+          <div class="term-chrome">
+            <span class="tc-dot tc-red"></span>
+            <span class="tc-dot tc-yel"></span>
+            <span class="tc-dot tc-grn"></span>
+            <span class="tc-title">send_message.sh</span>
+          </div>
+          <div class="form-body">
+            <form id="contact-form" action="https://formspree.io/f/mzdknekw" method="POST">
+              <div class="fi-row">
+                <div class="fi-group">
+                  <label class="fi-label">--name=</label>
+                  <input type="text" name="name" placeholder="Your Name" required class="fi-input">
+                </div>
+                <div class="fi-group">
+                  <label class="fi-label">--email=</label>
+                  <input type="email" name="email" placeholder="your@email.com" required class="fi-input">
+                </div>
+              </div>
+              <div class="fi-group">
+                <label class="fi-label">--subject=</label>
+                <input type="text" name="subject" placeholder="Opportunity / Collaboration / Project" class="fi-input">
+              </div>
+              <div class="fi-group">
+                <label class="fi-label">--message=</label>
+                <textarea name="message" rows="5" placeholder="Tell me about your project or opportunity..." required class="fi-input"></textarea>
+              </div>
+              <button type="submit" class="btn-send" id="send-btn">
+                <span id="send-txt">▶ execute send_message.sh</span>
+              </button>
+            </form>
+            <div id="form-ok" style="display:none" class="form-success">
+              <div class="fs-icon">✓</div>
+              <div class="fs-title">Message transmitted successfully.</div>
+              <div class="fs-sub">Response ETA: &lt; 24h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <span class="foot-left">prasanna@PNOS:~$ <span style="color:#00ff88">© 2026 Prasanna Nagarale</span></span>
+    <div class="foot-links">
+      <a href="#home">~/home</a>
+      <a href="#about">./about</a>
+      <a href="#projects">./projects</a>
+      <a href="#contact">./contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
