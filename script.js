@@ -1,705 +1,467 @@
-'use strict';
+/* ══════════════════════════════════════════════════════
+   PRASANNA NAGARALE — EDITORIAL PORTFOLIO
+   script.js — All interactions, animations, 3D effects
+══════════════════════════════════════════════════════ */
 
-/* ══════════════════════════════════════════
-   BOOT SEQUENCE
-══════════════════════════════════════════ */
 (function () {
-  const log   = document.getElementById('boot-log');
-  const bar   = document.getElementById('boot-bar');
-  const ready = document.getElementById('boot-ready');
-  const boot  = document.getElementById('boot');
+  'use strict';
 
-  const lines = [
-    { t:0,    cls:'bl-info', txt:'[    0.000] PNOS kernel 1.0.0 initializing...' },
-    { t:200,  cls:'bl-ok',   txt:'[    0.198] CPU: AI Processing Units — 8 cores OK' },
-    { t:380,  cls:'bl-ok',   txt:'[    0.381] MEM: 16384MB DDR5 — OK' },
-    { t:540,  cls:'bl-ok',   txt:'[    0.542] genai_llms.ko — loaded' },
-    { t:700,  cls:'bl-ok',   txt:'[    0.701] agent_frameworks.ko — loaded' },
-    { t:860,  cls:'bl-ok',   txt:'[    0.862] ml_data_science.ko — loaded' },
-    { t:1020, cls:'bl-warn', txt:'[    1.021] HuggingFace cache: 2 models found' },
-    { t:1180, cls:'bl-ok',   txt:'[    1.182] Network: github.com — reachable' },
-    { t:1340, cls:'bl-ok',   txt:'[    1.341] Starting session: prasanna@PNOS' },
-    { t:1500, cls:'bl-info', txt:'[    1.501] All systems operational.' },
+  /* ═══════════════════════════════════
+     PRESS LOADER
+  ═══════════════════════════════════ */
+  const loader  = document.getElementById('pressLoader');
+  const plBar   = document.getElementById('plBar');
+  const plPct   = document.getElementById('plPct');
+  const plHl    = document.getElementById('plHeadline');
+
+  const messages = [
+    'Going to press…',
+    'Setting the type…',
+    'Laying out the spreads…',
+    'Inking the plates…',
+    'Running the press…',
+    'First edition ready.'
   ];
 
-  let prog = 0;
-  lines.forEach(({ t, cls, txt }) => {
-    setTimeout(() => {
-      const d = document.createElement('div');
-      d.className = cls; d.textContent = txt;
-      log.appendChild(d);
-      prog += 10; bar.style.width = prog + '%';
-    }, t);
-  });
+  let progress = 0;
+  let msgIdx = 0;
+  const loaderInterval = setInterval(() => {
+    progress += Math.random() * 14 + 4;
+    if (progress >= 100) progress = 100;
 
-  setTimeout(() => { ready.style.opacity = '1'; }, 1700);
+    plBar.style.width  = progress + '%';
+    plPct.textContent  = Math.floor(progress) + '%';
 
-  let gone = false;
-  function dismiss() {
-    if (gone) return; gone = true;
-    boot.classList.add('done');
-    setTimeout(() => { boot.style.display = 'none'; }, 800);
-  }
-  setTimeout(dismiss, 2700);
-  ['keydown','scroll','touchstart','click'].forEach(ev =>
-    window.addEventListener(ev, dismiss, { once:true, passive:true })
-  );
-})();
-
-
-/* ══════════════════════════════════════════
-   CLOCK
-══════════════════════════════════════════ */
-(function () {
-  const el = document.getElementById('tb-clock');
-  if (!el) return;
-  const tick = () => {
-    const d = new Date();
-    el.textContent = [d.getHours(), d.getMinutes(), d.getSeconds()]
-      .map(n => String(n).padStart(2,'0')).join(':');
-  };
-  tick(); setInterval(tick, 1000);
-})();
-
-
-/* ══════════════════════════════════════════
-   NEURAL NETWORK — HERO BACKGROUND
-   Full-screen, rich, colorful, AI-themed
-══════════════════════════════════════════ */
-(function () {
-  const canvas = document.getElementById('neural-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let W, H, nodes, signals;
-  let active = true;
-  let animFrame;
-
-  const COLORS = ['#00ff88','#00d4ff','#ffcc00','#ff6b9d','#a78bfa'];
-  const NODE_COUNT = 55;
-  const CONN_DIST  = 160;
-
-  function init() {
-    W = canvas.width  = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-
-    nodes = Array.from({ length: NODE_COUNT }, (_, i) => ({
-      x:  Math.random() * W,
-      y:  Math.random() * H,
-      vx: (Math.random() - .5) * .32,
-      vy: (Math.random() - .5) * .32,
-      r:  Math.random() * 3 + 1.2,
-      c:  COLORS[i % COLORS.length],
-      phase: Math.random() * Math.PI * 2,
-      layer: Math.floor(Math.random() * 4) // simulate layers
-    }));
-
-    // Multiple traveling signals
-    signals = Array.from({ length: 8 }, () => makeSignal());
-  }
-
-  function makeSignal() {
-    const f = Math.floor(Math.random() * NODE_COUNT);
-    let t = Math.floor(Math.random() * NODE_COUNT);
-    while (t === f) t = Math.floor(Math.random() * NODE_COUNT);
-    return { f, t, p: 0, c: COLORS[Math.floor(Math.random() * COLORS.length)], speed: .006 + Math.random() * .006 };
-  }
-
-  init();
-  window.addEventListener('resize', init);
-
-  const obsHero = new IntersectionObserver(e => { active = e[0].isIntersecting; }, { threshold:.01 });
-  obsHero.observe(document.getElementById('home'));
-
-  let last = 0;
-  function draw(ts) {
-    animFrame = requestAnimationFrame(draw);
-    if (!active) return;
-    if (ts - last < 28) return; // ~35fps
-    last = ts;
-
-    ctx.clearRect(0, 0, W, H);
-
-    // Move nodes
-    nodes.forEach(n => {
-      n.phase += .012;
-      n.x += n.vx + Math.sin(n.phase) * .08;
-      n.y += n.vy + Math.cos(n.phase * .7) * .06;
-      if (n.x < -20) n.x = W + 20;
-      if (n.x > W + 20) n.x = -20;
-      if (n.y < -20) n.y = H + 20;
-      if (n.y > H + 20) n.y = -20;
-    });
-
-    // Draw connections
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const d  = Math.hypot(dx, dy);
-        if (d < CONN_DIST) {
-          const alpha = (1 - d / CONN_DIST) * 0.22;
-          const grad = ctx.createLinearGradient(nodes[i].x, nodes[i].y, nodes[j].x, nodes[j].y);
-          grad.addColorStop(0, nodes[i].c + Math.round(alpha * 255).toString(16).padStart(2,'0'));
-          grad.addColorStop(1, nodes[j].c + Math.round(alpha * 255).toString(16).padStart(2,'0'));
-          ctx.beginPath();
-          ctx.strokeStyle = grad;
-          ctx.lineWidth = .6;
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    // Draw nodes
-    nodes.forEach(n => {
-      const pulse = Math.sin(n.phase) * .4 + .7;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = n.c + 'bb';
-      ctx.shadowColor = n.c;
-      ctx.shadowBlur  = 8;
-      ctx.fill();
-      ctx.shadowBlur = 0;
-    });
-
-    // Traveling signals
-    signals.forEach((sig, idx) => {
-      const fn = nodes[sig.f], tn = nodes[sig.t];
-      const dx = tn.x - fn.x, dy = tn.y - fn.y;
-      const dist = Math.hypot(dx, dy);
-
-      if (dist < CONN_DIST) {
-        const sx = fn.x + dx * sig.p;
-        const sy = fn.y + dy * sig.p;
-
-        // Trail
-        for (let k = 1; k <= 5; k++) {
-          const tp = Math.max(0, sig.p - k * .04);
-          const tx = fn.x + dx * tp;
-          const ty = fn.y + dy * tp;
-          ctx.beginPath();
-          ctx.arc(tx, ty, 3 - k * .4, 0, Math.PI * 2);
-          ctx.fillStyle = sig.c + Math.round((1 - k/6) * 80).toString(16).padStart(2,'0');
-          ctx.fill();
-        }
-
-        // Head
-        ctx.beginPath();
-        ctx.arc(sx, sy, 4.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#fff';
-        ctx.shadowColor = sig.c;
-        ctx.shadowBlur  = 18;
-        ctx.fill();
-        ctx.shadowBlur = 0;
-      }
-
-      sig.p += sig.speed;
-      if (sig.p >= 1) signals[idx] = makeSignal();
-    });
-  }
-  requestAnimationFrame(draw);
-})();
-
-
-/* ══════════════════════════════════════════
-   SECTION AMBIENT CANVASES
-   Each section gets its own subtle canvas effect
-══════════════════════════════════════════ */
-(function () {
-
-  /* --- Shared tiny-dots + scan-line particle helper --- */
-  function makeDots(canvas, color, count, speed) {
-    const ctx = canvas.getContext('2d');
-    let W, H, pts;
-
-    function init() {
-      W = canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
-      H = canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
-      pts = Array.from({ length: count }, () => ({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vy: (Math.random() * speed + speed * .3) * (Math.random() > .5 ? 1 : -1),
-        vx: (Math.random() - .5) * speed * .6,
-        r:  Math.random() * 1.5 + .4,
-        a:  Math.random() * .5 + .1,
-      }));
-    }
-    init();
-
-    let last = 0;
-    function draw(ts) {
-      requestAnimationFrame(draw);
-      if (ts - last < 40) return;
-      last = ts;
-      ctx.clearRect(0, 0, W, H);
-      pts.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = color + Math.round(p.a * 180).toString(16).padStart(2,'0');
-        ctx.fill();
-      });
-    }
-    requestAnimationFrame(draw);
-
-    window.addEventListener('resize', () => {
-      W = canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
-      H = canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
-    });
-  }
-
-  /* --- Horizontal data-stream lines helper --- */
-  function makeDataStreams(canvas, color) {
-    const ctx = canvas.getContext('2d');
-    let W, H;
-    const streams = [];
-    const CHARS = '01<>/{}[]#@$';
-    const STREAM_COUNT = 22;
-
-    function init() {
-      W = canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
-      H = canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
-      streams.length = 0;
-      for (let i = 0; i < STREAM_COUNT; i++) {
-        streams.push({
-          x:  Math.random() * W,
-          y:  Math.random() * H,
-          len: Math.floor(Math.random() * 8 + 4),
-          speed: Math.random() * .8 + .3,
-          chars: Array.from({ length: 12 }, () => CHARS[Math.floor(Math.random() * CHARS.length)]),
-          head: 0, opacity: Math.random() * .18 + .04,
-        });
-      }
-    }
-    init();
-
-    let last = 0;
-    function draw(ts) {
-      requestAnimationFrame(draw);
-      if (ts - last < 80) return;
-      last = ts;
-      ctx.clearRect(0, 0, W, H);
-      ctx.font = '11px Berkeley Mono, monospace';
-
-      streams.forEach(s => {
-        for (let k = 0; k < s.len; k++) {
-          const alpha = (1 - k / s.len) * s.opacity;
-          ctx.fillStyle = color + Math.round(alpha * 255).toString(16).padStart(2,'0');
-          const ci = (Math.floor(s.head) + k) % s.chars.length;
-          if (Math.random() < .08) s.chars[ci] = CHARS[Math.floor(Math.random() * CHARS.length)];
-          ctx.fillText(s.chars[ci], s.x, s.y - k * 14);
-        }
-        s.head += s.speed;
-        if (s.y > H + 80) { s.y = -20; s.x = Math.random() * W; }
-        s.y += s.speed * .5;
-      });
-    }
-    requestAnimationFrame(draw);
-    window.addEventListener('resize', init);
-  }
-
-  /* --- Circuit-board grid lines --- */
-  function makeCircuit(canvas, color) {
-    const ctx = canvas.getContext('2d');
-    let W, H;
-    const lines = [];
-
-    function init() {
-      W = canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
-      H = canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
-      lines.length = 0;
-      const COUNT = 18;
-      for (let i = 0; i < COUNT; i++) {
-        const horiz = Math.random() > .5;
-        lines.push({
-          x: Math.random() * W, y: Math.random() * H,
-          horiz, len: Math.random() * 180 + 60,
-          speed: (Math.random() * .6 + .2) * (Math.random() > .5 ? 1 : -1),
-          t: Math.random(), alpha: Math.random() * .12 + .03,
-        });
-      }
-    }
-    init();
-
-    let last = 0;
-    function draw(ts) {
-      requestAnimationFrame(draw);
-      if (ts - last < 50) return;
-      last = ts;
-      ctx.clearRect(0, 0, W, H);
-      ctx.lineWidth = .7;
-      lines.forEach(l => {
-        l.t += .004;
-        if (l.t > 1) l.t = 0;
-        const bright = Math.abs(Math.sin(l.t * Math.PI));
-        ctx.beginPath();
-        ctx.strokeStyle = color + Math.round(bright * l.alpha * 255).toString(16).padStart(2,'0');
-        if (l.horiz) {
-          ctx.moveTo(l.x, l.y);
-          ctx.lineTo(l.x + l.len, l.y);
-        } else {
-          ctx.moveTo(l.x, l.y);
-          ctx.lineTo(l.x, l.y + l.len);
-        }
-        ctx.stroke();
-        // dot at joints
-        ctx.beginPath();
-        ctx.arc(l.x, l.y, 1.5, 0, Math.PI * 2);
-        ctx.fillStyle = color + '33';
-        ctx.fill();
-      });
-    }
-    requestAnimationFrame(draw);
-    window.addEventListener('resize', init);
-  }
-
-  // Assign effects to sections
-  const aboutC   = document.getElementById('about-canvas');
-  const expC     = document.getElementById('exp-canvas');
-  const projC    = document.getElementById('proj-canvas');
-  const skillsC  = document.getElementById('skills-canvas');
-  const contactC = document.getElementById('contact-canvas');
-
-  // Use IntersectionObserver-based lazy init to avoid layout issues
-  function lazyInit(el, fn) {
-    if (!el) return;
-    const obs = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) { fn(); obs.disconnect(); }
-    }, { threshold: .01 });
-    obs.observe(el.parentElement);
-  }
-
-  lazyInit(aboutC,   () => makeDots(aboutC,   '#00ff88', 40, .25));
-  lazyInit(expC,     () => makeDataStreams(expC, '#a78bfa'));
-  lazyInit(projC,    () => makeDots(projC,    '#00d4ff', 35, .2));
-  lazyInit(skillsC,  () => makeCircuit(skillsC, '#00d4ff'));
-  lazyInit(contactC, () => makeDataStreams(contactC, '#00ff88'));
-
-})();
-
-
-/* ══════════════════════════════════════════
-   HERO TERMINAL TYPEWRITER
-══════════════════════════════════════════ */
-(function () {
-  const cmdEl    = document.getElementById('hero-cmd');
-  const outputEl = document.getElementById('hero-output');
-  const ctaEl    = document.getElementById('hero-cta');
-  if (!cmdEl) return;
-
-  const command = 'whoami --verbose --format=ai-engineer';
-  const outputLines = [
-    { delay:0,   html:'<span class="to-name">PRASANNA<br><span class="hl">NAGARALE</span></span>' },
-    { delay:160, html:'<span class="to-role">AI / ML Engineer — Open to Opportunities</span>' },
-    { delay:320, html:'<span class="to-line">Built <span class="hi">RAG pipelines</span>, fine-tuned <span class="hi">LLMs</span>, shipped <span class="hi">multi-agent platforms</span> at scale.</span>' },
-    { delay:480, html:'<span class="to-line">500+ users in production · 99.3% ML accuracy · 2 HuggingFace models published.</span>' },
-  ];
-
-  function typeLine(idx) {
-    if (idx >= command.length) {
-      outputLines.forEach(({ delay, html }) => {
-        setTimeout(() => {
-          const d = document.createElement('div');
-          d.innerHTML = html; outputEl.appendChild(d);
-        }, delay + 180);
-      });
+    const newIdx = Math.min(Math.floor(progress / 20), messages.length - 1);
+    if (newIdx !== msgIdx) {
+      msgIdx = newIdx;
+      plHl.style.opacity = '0';
       setTimeout(() => {
-        ctaEl.style.display = 'flex';
-        ctaEl.style.opacity = '0';
-        ctaEl.style.transition = 'opacity .5s ease';
-        requestAnimationFrame(() => { ctaEl.style.opacity = '1'; });
-      }, outputLines.at(-1).delay + 460);
-      return;
+        plHl.textContent  = messages[msgIdx];
+        plHl.style.opacity = '1';
+      }, 300);
     }
-    cmdEl.textContent += command[idx];
-    setTimeout(() => typeLine(idx + 1), 32 + Math.random() * 18);
+
+    if (progress >= 100) {
+      clearInterval(loaderInterval);
+      setTimeout(() => {
+        loader.classList.add('done');
+        document.body.classList.add('loaded');
+        initAll();
+      }, 600);
+    }
+  }, 80);
+
+
+  /* ═══════════════════════════════════
+     INIT ALL
+  ═══════════════════════════════════ */
+  function initAll() {
+    initCursor();
+    initNav();
+    initScrollProgress();
+    initReveal();
+    initTiltCards();
+    initMag3D();
+    initCounters();
+    initForm();
+    initActiveNav();
   }
-  setTimeout(() => typeLine(0), 3100);
-})();
 
 
-/* ══════════════════════════════════════════
-   NAV — active section + hamburger
-══════════════════════════════════════════ */
-(function () {
-  const links    = document.querySelectorAll('.tb-link');
-  const proc     = document.getElementById('tb-proc');
-  const ham      = document.getElementById('tb-ham');
-  const mobNav   = document.getElementById('mob-nav');
-  const sections = [...document.querySelectorAll('section[id]')];
+  /* ═══════════════════════════════════
+     CURSOR
+  ═══════════════════════════════════ */
+  function initCursor() {
+    const cursor = document.getElementById('cursor');
+    const trail  = document.getElementById('cursorTrail');
+    if (!cursor || !trail) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
 
-  const procMap = {
-    home:'~/home', about:'cat about.sys',
-    experience:'git log --experience', projects:'ls ./projects/',
-    skills:'pip list --installed', contact:'ssh prasanna@nagarale.dev'
-  };
+    let mx = -200, my = -200;
+    let tx = -200, ty = -200;
 
-  ham?.addEventListener('click', () => {
-    ham.classList.toggle('open');
-    mobNav?.classList.toggle('open');
-  });
-  document.querySelectorAll('.mob-link,.tb-link').forEach(a => {
-    a.addEventListener('click', () => {
-      ham?.classList.remove('open');
-      mobNav?.classList.remove('open');
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
     });
-  });
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); t.scrollIntoView({ behavior:'smooth' }); }
-    });
-  });
 
-  function update() {
-    const mid = window.scrollY + window.innerHeight * .42;
-    let cur = sections[0].id;
-    sections.forEach(s => { if (s.offsetTop <= mid) cur = s.id; });
-    links.forEach(l => l.classList.toggle('active', l.dataset.section === cur));
-    if (proc) proc.textContent = procMap[cur] || '~';
+    // Trail follows with lag
+    function animTrail() {
+      tx += (mx - tx) * 0.12;
+      ty += (my - ty) * 0.12;
+      trail.style.left = tx + 'px';
+      trail.style.top  = ty + 'px';
+      requestAnimationFrame(animTrail);
+    }
+    animTrail();
+
+    // Hover state on interactive elements
+    const hoverEls = document.querySelectorAll(
+      'a, button, .tilt-card, .feat, .pq, .skc, .pc'
+    );
+    hoverEls.forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.classList.add('hovering');
+        trail.classList.add('hovering');
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.classList.remove('hovering');
+        trail.classList.remove('hovering');
+      });
+    });
   }
-  window.addEventListener('scroll', update, { passive:true });
-  update();
-})();
 
 
-/* ══════════════════════════════════════════
-   SCROLL REVEAL
-══════════════════════════════════════════ */
-(function () {
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('shown'); obs.unobserve(e.target); }
+  /* ═══════════════════════════════════
+     NAV
+  ═══════════════════════════════════ */
+  function initNav() {
+    const nav    = document.getElementById('nav');
+    const ham    = document.getElementById('navHam');
+    const mobile = document.getElementById('navMobile');
+
+    // Scroll background
+    const onScroll = () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Hamburger
+    ham.addEventListener('click', () => {
+      const open = ham.classList.toggle('open');
+      mobile.classList.toggle('open', open);
+      ham.setAttribute('aria-expanded', open);
     });
-  }, { threshold:.06, rootMargin:'0px 0px -20px 0px' });
-  document.querySelectorAll('.rev').forEach(el => obs.observe(el));
-  setTimeout(() => document.querySelectorAll('.rev').forEach(el => el.classList.add('shown')), 5000);
-})();
 
-
-/* ══════════════════════════════════════════
-   STAT BAR ANIMATION
-══════════════════════════════════════════ */
-(function () {
-  const obs = new IntersectionObserver(entries => {
-    if (!entries[0].isIntersecting) return;
-    document.querySelectorAll('.si-fill').forEach(el => {
-      const w = el.style.width; el.style.width = '0%';
-      requestAnimationFrame(() => requestAnimationFrame(() => { el.style.width = w; }));
+    // Close mobile nav on link click
+    mobile.querySelectorAll('.nm-link').forEach(link => {
+      link.addEventListener('click', () => {
+        ham.classList.remove('open');
+        mobile.classList.remove('open');
+        ham.setAttribute('aria-expanded', 'false');
+      });
     });
-    obs.disconnect();
-  }, { threshold:.3 });
-  const ab = document.getElementById('about');
-  if (ab) obs.observe(ab);
-})();
+  }
 
 
-/* ══════════════════════════════════════════
-   CONTACT FORM
-══════════════════════════════════════════ */
-(function () {
-  const form = document.getElementById('contact-form');
-  const btn  = document.getElementById('send-btn');
-  const txt  = document.getElementById('send-txt');
-  const ok   = document.getElementById('form-ok');
+  /* ═══════════════════════════════════
+     SCROLL PROGRESS BAR
+  ═══════════════════════════════════ */
+  function initScrollProgress() {
+    const fill = document.getElementById('spFill');
+    if (!fill) return;
+    const update = () => {
+      const total  = document.documentElement.scrollHeight - window.innerHeight;
+      const pct    = total > 0 ? (window.scrollY / total) * 100 : 0;
+      fill.style.width = pct + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  }
+
+
+  /* ═══════════════════════════════════
+     SCROLL REVEAL
+  ═══════════════════════════════════ */
+  function initReveal() {
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('shown');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(el => obs.observe(el));
+  }
+
+
+  /* ═══════════════════════════════════
+     3D TILT CARDS (mouse tracking)
+  ═══════════════════════════════════ */
+  function initTiltCards() {
+    const cards = document.querySelectorAll('.tilt-card');
+    const MAX_TILT = 8; // degrees
+
+    cards.forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r    = card.getBoundingClientRect();
+        const cx   = r.left + r.width  / 2;
+        const cy   = r.top  + r.height / 2;
+        const dx   = (e.clientX - cx) / (r.width  / 2);
+        const dy   = (e.clientY - cy) / (r.height / 2);
+        const rx   = -dy * MAX_TILT;
+        const ry   =  dx * MAX_TILT;
+        card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) scale3d(1.02,1.02,1.02)`;
+        card.style.transition = 'transform .08s ease';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform .55s var(--ease)';
+      });
+    });
+  }
+
+
+  /* ═══════════════════════════════════
+     3D MAGAZINE — mouse parallax
+  ═══════════════════════════════════ */
+  function initMag3D() {
+    const mag = document.getElementById('mag3d');
+    if (!mag) return;
+    // Touch devices keep the static CSS tilt — no JS needed
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    let bX = -18, bY = -18, bZ = -1.5;
+    let tX = bX, tY = bY, tZ = bZ;
+    let cX = bX, cY = bY, cZ = bZ;
+
+    document.addEventListener('mousemove', e => {
+      const nx = (e.clientX / window.innerWidth  - 0.5) * 2;
+      const ny = (e.clientY / window.innerHeight - 0.5) * 2;
+      tX = bX + ny * 5;
+      tY = bY - nx * 5;
+      tZ = bZ + nx * 1.2;
+    });
+
+    function loop() {
+      cX += (tX - cX) * 0.055;
+      cY += (tY - cY) * 0.055;
+      cZ += (tZ - cZ) * 0.055;
+      mag.style.transform = `rotateY(${cY}deg) rotateX(${cX}deg) rotateZ(${cZ}deg)`;
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+
+  /* ═══════════════════════════════════
+     ANIMATED COUNTERS
+  ═══════════════════════════════════ */
+  function initCounters() {
+    const counters = document.querySelectorAll('.sv[data-target]');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        obs.unobserve(e.target);
+        animateCounter(e.target);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(el => obs.observe(el));
+  }
+
+  function animateCounter(el) {
+    const target  = parseFloat(el.dataset.target);
+    const suffix  = el.dataset.suffix || '';
+    const dec     = parseInt(el.dataset.dec || '0');
+    const dur     = 1600;
+    const start   = performance.now();
+
+    function step(now) {
+      const t    = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 4); // ease-out-quart
+      const val  = target * ease;
+      el.textContent = val.toFixed(dec) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+
+  /* ═══════════════════════════════════
+     CONTACT FORM
+  ═══════════════════════════════════ */
+function initForm() {
+  const form    = document.getElementById('contactForm');
+  const btn     = document.getElementById('submitBtn');
+  const defSpan = document.getElementById('subDef');
+  const sentSpan = document.getElementById('subSent');
   if (!form) return;
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
-    txt.textContent = '▶ transmitting...';
     btn.disabled = true;
+    defSpan.style.display = 'none';
+    sentSpan.style.display = 'inline';
+    btn.classList.add('sent');
+
     try {
-      const res = await fetch('https://formspree.io/f/mzdknekw', {
-        method:'POST', body:new FormData(form),
-        headers:{ 'Accept':'application/json' }
+      await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
       });
-      if (res.ok) {
-        form.style.display = 'none';
-        ok.style.display   = 'block';
-      } else {
-        const d = await res.json();
-        const msg = d?.errors?.map(e => e.message).join(', ') || 'Error';
-        txt.textContent = `✗ ${msg}`; btn.disabled = false;
-        setTimeout(() => { txt.textContent = '▶ execute send_message.sh'; }, 4000);
-      }
-    } catch {
-      txt.textContent = '✗ Network error'; btn.disabled = false;
-      setTimeout(() => { txt.textContent = '▶ execute send_message.sh'; }, 4000);
+    } catch (err) {
+      console.error('Form error:', err);
     }
+
+    setTimeout(() => {
+      btn.classList.remove('sent');
+      defSpan.style.display = 'inline';
+      sentSpan.style.display = 'none';
+      btn.disabled = false;
+      form.reset();
+    }, 4000);
   });
-})();
+}
 
 
-/* ══════════════════════════════════════════
-   FEATURE 1 — SYSTEM BOOT SCROLLBAR HUD
-══════════════════════════════════════════ */
-(function () {
-  const fill   = document.getElementById('scroll-fill');
-  const thumb  = document.getElementById('scroll-thumb');
-  const pct    = document.getElementById('scroll-pct');
-  const track  = document.getElementById('scroll-track');
-  if (!fill) return;
+  /* ═══════════════════════════════════
+     ACTIVE NAV LINK ON SCROLL
+  ═══════════════════════════════════ */
+  function initActiveNav() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links .nl');
 
-  function update() {
-    const scrollTop = window.scrollY;
-    const docH      = document.documentElement.scrollHeight - window.innerHeight;
-    const ratio     = docH > 0 ? Math.min(scrollTop / docH, 1) : 0;
-    const p         = Math.round(ratio * 100);
-
-    fill.style.height  = p + '%';
-    pct.textContent    = p + '%';
-
-    // Position thumb
-    const trackH = track.offsetHeight;
-    thumb.style.top = (ratio * (trackH - 8)) + 'px';
-
-    // Color shift: green → cyan → purple as you scroll
-    if (p < 50) {
-      const t = p / 50;
-      const r = Math.round(0   + t * 0);
-      const g = Math.round(255 + t * (212 - 255));
-      const b = Math.round(136 + t * (255 - 136));
-      const col = `rgb(${r},${g},${b})`;
-      fill.style.background  = `linear-gradient(to bottom, #00ff88, ${col})`;
-      fill.style.boxShadow   = `0 0 8px #00ff88`;
-      pct.style.color        = col;
-      pct.style.textShadow   = `0 0 6px ${col}`;
-      thumb.style.background = col;
-      thumb.style.boxShadow  = `0 0 8px ${col}, 0 0 16px rgba(0,255,136,0.3)`;
-    } else {
-      const t = (p - 50) / 50;
-      const r = Math.round(0   + t * 167);
-      const g = Math.round(212 + t * (139 - 212));
-      const b = Math.round(255 + t * (250 - 255));
-      const col = `rgb(${r},${g},${b})`;
-      fill.style.background  = `linear-gradient(to bottom, #00d4ff, ${col})`;
-      fill.style.boxShadow   = `0 0 8px #00d4ff`;
-      pct.style.color        = col;
-      pct.style.textShadow   = `0 0 6px ${col}`;
-      thumb.style.background = col;
-      thumb.style.boxShadow  = `0 0 8px ${col}, 0 0 16px rgba(167,139,250,0.3)`;
-    }
-  }
-
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
-})();
-
-
-/* ══════════════════════════════════════════
-   FEATURE 2 — DECRYPTION HOVER ON PROJECT NAMES
-   Matrix scramble → resolves to real name
-══════════════════════════════════════════ */
-(function () {
-  const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>{}[]|/\\@#$%^&*~!?';
-  const FRAMES = 8;    // scramble frames
-  const FRAME_MS = 38; // ms per frame
-
-  function scramble(el) {
-    const original = el.dataset.text || el.textContent;
-    let frame = 0;
-    el.classList.add('decrypting');
-
-    const interval = setInterval(() => {
-      frame++;
-      if (frame >= FRAMES) {
-        clearInterval(interval);
-        el.textContent = original;
-        el.classList.remove('decrypting');
-        return;
-      }
-      // Each frame: reveal more correct chars from left
-      const revealed = Math.floor((frame / FRAMES) * original.length);
-      let out = '';
-      for (let i = 0; i < original.length; i++) {
-        if (i < revealed || original[i] === ' ') {
-          out += original[i];
-        } else {
-          out += CHARS[Math.floor(Math.random() * CHARS.length)];
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(link => {
+            const active = link.getAttribute('href') === '#' + e.target.id;
+            link.classList.toggle('active', active);
+          });
         }
-      }
-      el.textContent = out;
-    }, FRAME_MS);
+      });
+    }, { threshold: 0.35 });
+
+    sections.forEach(sec => obs.observe(sec));
   }
 
-  // Apply to all project name elements
-  document.querySelectorAll('.pc-name[data-text], .pf-name').forEach(el => {
-    if (!el.dataset.text) el.dataset.text = el.textContent.trim();
-    el.closest('.proj-card, .proj-flagship')?.addEventListener('mouseenter', () => {
-      scramble(el);
+
+  /* ═══════════════════════════════════
+     PARALLAX ON HERO GEOMETRICS
+  ═══════════════════════════════════ */
+  (function initParallax() {
+    const geos = document.querySelectorAll('.geo');
+    if (!geos.length) return;
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+
+    document.addEventListener('mousemove', e => {
+      const nx = (e.clientX / window.innerWidth  - 0.5);
+      const ny = (e.clientY / window.innerHeight - 0.5);
+      geos.forEach((g, i) => {
+        const depth = (i + 1) * 8;
+        g.style.transform = `translate(${nx * depth}px, ${ny * depth}px) rotate(${nx * 5}deg)`;
+      });
+    });
+  })();
+
+
+  /* ═══════════════════════════════════
+     SMOOTH SCROLL for anchor links
+  ═══════════════════════════════════ */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
-})();
 
 
-/* ══════════════════════════════════════════
-   FEATURE 3 — LIVE UPTIME COUNTER
-══════════════════════════════════════════ */
-(function () {
-  const el = document.getElementById('tb-uptime');
-  if (!el) return;
-  const start = Date.now();
-
-  function tick() {
-    const elapsed = Math.floor((Date.now() - start) / 1000);
-    const h = Math.floor(elapsed / 3600);
-    const m = Math.floor((elapsed % 3600) / 60);
-    const s = elapsed % 60;
-    el.textContent = [h, m, s].map(n => String(n).padStart(2, '0')).join(':');
-  }
-
-  tick();
-  setInterval(tick, 1000);
-})();
-
-
-/* ══════════════════════════════════════════
-   FEATURE 4 — COUNT-UP NUMBER ANIMATION
-   Fires when about section enters viewport
-══════════════════════════════════════════ */
-(function () {
-  const targets = document.querySelectorAll('.si-val[data-target]');
-  if (!targets.length) return;
-
-  let fired = false;
-
-  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-  function runCountUp() {
-    if (fired) return;
-    fired = true;
-
-    targets.forEach(el => {
-      const end      = parseFloat(el.dataset.target);
-      const suffix   = el.dataset.suffix || '';
-      const decimals = parseInt(el.dataset.decimal || '0');
-      const duration = 1600;
-      const startT   = performance.now();
-
-      function frame(now) {
-        const elapsed = now - startT;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased    = easeOut(progress);
-        const current  = end * eased;
-        el.textContent = current.toFixed(decimals) + suffix;
-        if (progress < 1) requestAnimationFrame(frame);
-      }
-
-      // Reset to 0 first
-      el.textContent = '0' + suffix;
-      requestAnimationFrame(frame);
+  /* ═══════════════════════════════════
+     SKILL TAG HOVER WAVE
+  ═══════════════════════════════════ */
+  (function initSkillWave() {
+    const clusters = document.querySelectorAll('.skc');
+    clusters.forEach(cluster => {
+      const tags = cluster.querySelectorAll('.sk');
+      cluster.addEventListener('mouseenter', () => {
+        tags.forEach((tag, i) => {
+          setTimeout(() => {
+            tag.style.background = 'var(--wine)';
+            tag.style.borderColor = 'var(--wine)';
+            tag.style.color = 'var(--paper)';
+          }, i * 40);
+        });
+      });
+      cluster.addEventListener('mouseleave', () => {
+        tags.forEach(tag => {
+          tag.style.background = '';
+          tag.style.borderColor = '';
+          tag.style.color = '';
+        });
+      });
     });
-  }
+  })();
 
-  // Trigger on scroll into about section
-  const obs = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { runCountUp(); obs.disconnect(); }
-  }, { threshold: 0.4 });
 
-  const about = document.getElementById('about');
-  if (about) obs.observe(about);
+  /* ═══════════════════════════════════
+     FEATURED CARD PARALLAX SHIFT
+  ═══════════════════════════════════ */
+  (function initFeatParallax() {
+    const feat = document.querySelector('.feat');
+    if (!feat) return;
+
+    feat.addEventListener('mousemove', e => {
+      const r  = feat.getBoundingClientRect();
+      const x  = (e.clientX - r.left) / r.width  - 0.5;
+      const y  = (e.clientY - r.top)  / r.height - 0.5;
+      const hl = feat.querySelector('.feat-hl');
+      if (hl) {
+        hl.style.transform = `translate(${x * 6}px, ${y * 4}px)`;
+        hl.style.transition = 'transform .15s ease';
+      }
+    });
+    feat.addEventListener('mouseleave', () => {
+      const hl = feat.querySelector('.feat-hl');
+      if (hl) { hl.style.transform = ''; hl.style.transition = 'transform .6s ease'; }
+    });
+  })();
+
+
+  /* ═══════════════════════════════════
+     SECTION ENTRANCE TYPOGRAPHY EFFECT
+     (project card names stagger on scroll)
+  ═══════════════════════════════════ */
+  (function initCardStagger() {
+    const grid = document.querySelector('.proj-grid');
+    if (!grid) return;
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        const names = grid.querySelectorAll('.pc-name');
+        names.forEach((n, i) => {
+          n.style.opacity = '0';
+          n.style.transform = 'translateX(-12px)';
+          setTimeout(() => {
+            n.style.transition = 'opacity .5s ease, transform .5s ease';
+            n.style.opacity = '1';
+            n.style.transform = 'none';
+          }, 120 + i * 60);
+        });
+        obs.unobserve(entries[0].target);
+      }
+    }, { threshold: 0.15 });
+    obs.observe(grid);
+  })();
+
+
+  /* ═══════════════════════════════════
+     PULLQUOTE TILT ON SCROLL
+  ═══════════════════════════════════ */
+  (function initPQScroll() {
+    const pq = document.querySelector('.pq');
+    if (!pq) return;
+    const update = () => {
+      const r = pq.getBoundingClientRect();
+      const vc = window.innerHeight / 2;
+      const delta = (r.top + r.height / 2 - vc) / window.innerHeight;
+      pq.style.transform = `rotateZ(${-0.8 + delta * 1.5}deg)`;
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+
+
+  /* ═══════════════════════════════════
+     PAGE LOAD POLISH — flash prevention
+  ═══════════════════════════════════ */
+  // Body starts opacity:0, becomes 1 after loader
+  // Already handled by CSS + initAll() above
+
 })();
