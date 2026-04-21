@@ -45,10 +45,12 @@
     if (progress >= 100) {
       clearInterval(loaderInterval);
       setTimeout(() => {
-        loader.classList.add('done');
-        document.body.classList.add('loaded');
-        initAll();
-      }, 600);
+      document.body.classList.add('loaded');
+      initAll();
+      setTimeout(() => {
+      loader.classList.add('done');
+      }, 350);
+    }, 600);
     }
   }, 80);
 
